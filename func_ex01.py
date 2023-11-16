@@ -23,7 +23,7 @@ list[2] = st[1] + st[2] || st[0] + st[1]
 
 """
 
-# 계단의 개수
+"""# 계단의 개수
 n = int(input())
 
 # 계단에 쓰여있는 점수
@@ -48,3 +48,23 @@ else:
     for i in range(2, n):
         dp[i] = max(dp[i - 3] + score[i - 1] + score[i], dp[i - 2] + score[i])
     print(dp[-1])
+"""
+
+# 전유진 코드
+
+n = int(input())  # 계단 개수 입력받기
+s = [int(input()) for _ in range(n)]  # 계단 점수 받기
+
+
+# 점수 세는 재귀함수
+def f(i, cnt):
+    if i >= n:
+        return 0
+    if cnt == 2:
+        return f(i + 1, 0)
+    # i가 1 또는 2가 아니면
+    else:
+        return max(f(i + 1, cnt + 1) + s[i], f(i + 1, 0))
+
+
+print(f(0, 0))
